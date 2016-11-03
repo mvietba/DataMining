@@ -66,6 +66,7 @@ Such variables are called `zero` or `near zero variance` and it is a good practi
 To do so we used a `nearZeroVar` function which removed from our set 2 variables, so in total at this point we had 56 predictors. Unfortunately this is still too many.
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 nzv <- nearZeroVar(data)
+names(data)[nzv]
 data <- data[, -nzv]
 ```
 

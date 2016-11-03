@@ -207,7 +207,9 @@ sum(!complete.cases(data))</code></pre>
 <p>Some of predictors may be non-informative (f.e very similar or even constant throughout the whole data) and in some cases even break the model. Such variables are called <code>zero</code> or <code>near zero variance</code> and it is a good practice to remove them before classification.</p>
 <p>To do so we used a <code>nearZeroVar</code> function which removed from our set 2 variables, so in total at this point we had 56 predictors. Unfortunately this is still too many.</p>
 <pre class="r"><code>nzv &lt;- nearZeroVar(data)
-data &lt;- data[, -nzv]</code></pre>
+names(data)[nzv]</code></pre>
+<pre><code>## [1] &quot;n_non_stop_words&quot; &quot;kw_min_max&quot;</code></pre>
+<pre class="r"><code>data &lt;- data[, -nzv]</code></pre>
 </div>
 <div id="normalisation" class="section level3">
 <h3>Normalisation</h3>
@@ -264,15 +266,15 @@ rfWithFilter</code></pre>
 ## Resampling performance:
 ## 
 ##  Accuracy  Kappa AccuracySD KappaSD
-##    0.5903 0.1759    0.04806 0.09588
+##    0.6286 0.2513    0.04648 0.09452
 ## 
-## Using the training set, 17 variables were selected:
-##    num_hrefs, num_imgs, num_keywords, data_channel_is_entertainment, data_channel_is_socmed...
+## Using the training set, 13 variables were selected:
+##    num_hrefs, num_imgs, data_channel_is_entertainment, data_channel_is_socmed, data_channel_is_tech...
 ## 
-## During resampling, the top 5 selected variables (out of a possible 23):
-##    data_channel_is_entertainment (100%), data_channel_is_socmed (100%), data_channel_is_tech (100%), global_subjectivity (100%), is_weekend (100%)
+## During resampling, the top 5 selected variables (out of a possible 25):
+##    data_channel_is_entertainment (100%), data_channel_is_socmed (100%), data_channel_is_tech (100%), global_rate_positive_words (100%), global_subjectivity (100%)
 ## 
-## On average, 15.9 variables were selected (min = 13, max = 20)</code></pre>
+## On average, 13.5 variables were selected (min = 10, max = 17)</code></pre>
 <div id="sbf-result-analysis" class="section level3">
 <h3>SBF result analysis</h3>
 <p>From the correlation plot we can see by the colour and the size of circles that the selected variables are not highly correlated which makes them good predictors.</p>
